@@ -5,7 +5,7 @@
       <span :class="`fi-${originalLanguage} fis`"></span>
 
       <h1>{{ title }}</h1>
-      <h2>{{ originalTitle }}</h2>
+      <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>
 
       <h3>{{ voteAverage }}</h3>
     </div>
@@ -26,6 +26,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card {
+  overflow: hidden;
+  position: relative;
+}
+
 img {
   width: 100%;
 }
@@ -36,6 +41,11 @@ h3 {
   font-size: 1rem;
 }
 
+h2 {
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
 h3 {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -44,5 +54,23 @@ h3 {
   width: 16px;
   height: 16px;
   display: inline-block;
+}
+
+.card-body {
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) opacity 0.3s;
+  background-color: rgba($color: black, $alpha: 0.75);
+  opacity: 0;
+}
+
+.card:hover .card-body {
+  opacity: 1;
 }
 </style>
