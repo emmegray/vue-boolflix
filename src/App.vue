@@ -3,16 +3,21 @@
     <header-comp>
       <search-bar-comp @searchMovie="saveQuery"></search-bar-comp>
     </header-comp>
-    <div>
-      <MoviePoster 
-        v-for="movie in movies"
-        :key="movie.id"
-        :poster="movie.poster_path"
-        :title="movie.title"
-        :originalTitle="movie.original_title"
-        :originalLanguage="movie.original_language"
-        :voteAverage="movie.vote_average"
-      />
+    <div class="container">
+      <div class="row">
+        <div 
+          v-for="movie in movies"
+          :key="movie.id"
+          class="col-2">
+          <MoviePoster
+            :poster="movie.poster_path"
+            :title="movie.title"
+            :originalTitle="movie.original_title"
+            :originalLanguage="movie.original_language"
+            :voteAverage="movie.vote_average"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -76,5 +81,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  padding-top: 100px;
 }
 </style>

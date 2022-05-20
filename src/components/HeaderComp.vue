@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <h1>BOOFLIX</h1>
+    <img src="https://fontmeme.com/permalink/220520/5eb8c995a6653abb8ffe3ce39ff01a53.png" alt="logo" srcset=""/>
     <slot></slot>
   </nav>
 </template>
@@ -21,5 +21,10 @@ nav {
   background-color: black;
   color: red;
   text-align: start;
-}
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+} 
 </style>
