@@ -53,11 +53,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input {
-  padding: 10px;
+input, select {
+  padding: 8px;
   margin-right: 10px;
   border-radius: 10px;
 }
+
 button {
   padding: 8px 10px;
   border-radius: 10px;
