@@ -5,7 +5,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'flag-icons/sass/flag-icons.scss'
+import 'flag-icons/sass/flag-icons.scss' // Country Icons
 
 /* Fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'

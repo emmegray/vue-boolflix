@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <header-comp>
-      <search-bar-comp @searchMovie="saveQuery"></search-bar-comp>
+    <header-comp @homeClick="getPopularMovies">
+      <search-bar-comp @searchMovie="saveQuery" @searchMovieGenre="saveGenre"></search-bar-comp>
     </header-comp>
     <div class="container">
       <div class="row">
-        <div 
-          v-for="movie in movies"
-          :key="movie.id"
-          class="col-2">
-          <MoviePoster
-            :poster="movie.poster_path"
-            :title="movie.title"
-            :originalTitle="movie.original_title"
-            :originalLanguage="movie.original_language"
-            :voteAverage="movie.vote_average"
-          />
+        <div v-for="movie in movies" :key="movie.id" class="col-3">
+          <MoviePoster :poster="movie.poster_path" :title="movie.title" :originalTitle="movie.original_title"
+            :originalLanguage="movie.original_language" :voteAverage="movie.vote_average" />
+        </div>
+        <div class="col-12 not-found" v-if="query && movies.length == 0">
+          <h1>Nessun film trovato</h1>
         </div>
       </div>
     </div>
@@ -23,10 +18,10 @@
 </template>
 
 <script>
-import axios from "axios";
 import HeaderComp from './components/HeaderComp.vue'
 import SearchBarComp from './components/SearchBarComp.vue'
 import MoviePoster from "./components/MoviePoster.vue";
+import { getMoviePopular, getSearchMovie } from './api';
 
 export default {
   name: 'App',
@@ -34,53 +29,87 @@ export default {
     HeaderComp,
     SearchBarComp,
     MoviePoster
-},
-  data (){
+  },
+  data() {
     return {
-      apiUrl: 'https://api.themoviedb.org/3/search/movie',
-      api_key:'912eb08b9205eeff45dbaffd282e9c4e',
-      language: 'it_IT',
       query: '',
+      genre: null,
       movies: [],
     }
   },
-  methods:{
-    saveQuery (value) {
+  methods: {
+    saveQuery(value) {
       this.query = value
     },
 
-    getApi () {
-      axios.get(this.apiUrl, {
-        params: {
-          api_key: this.api_key,
-          language: this.language,
-          query: this.query,
-        }
-      })
-      .then(res => {
-        this.movies = res.data.results
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    saveGenre(value) {
+      this.genre = value
+    },
+
+    getMoviesQuery() {
+      getSearchMovie(this.query, this.genre)
+        .then((res) => {
+          this.movies = res.data.results;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.movies = [];
+          }
+        })
+    },
+
+    getPopularMovies() {
+      getMoviePopular(this.genre)
+        .then((res) => {
+          this.movies = res.data.results;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.movies = [];
+          }
+        })
+    },
+
+    load() {
+      if (this.query) {
+        this.getMoviesQuery();
+      } else {
+        this.getPopularMovies();
+      }
     }
   },
   watch: {
-    query () {
-      this.getApi();
-    }
+    query() {
+      this.load()
+    },
+    genre() {
+      this.load()
+    },
+  },
+  mounted() {
+    this.load()
   }
 }
 </script>
 
 <style lang="scss">
+html {
+  background: #1f1f1f;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  background: #1f1f1f;
   margin-top: 60px;
   padding-top: 100px;
+}
+
+.row>div {
+  margin-bottom: 30px;
+}
+
+.not-found {
+  text-align: center;
+  color: white;
+  margin: 60px;
 }
 </style>

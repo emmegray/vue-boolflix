@@ -1,13 +1,18 @@
 <template>
   <nav>
-    <img src="https://fontmeme.com/permalink/220520/5eb8c995a6653abb8ffe3ce39ff01a53.png" alt="logo" srcset=""/>
+    <a @click="homeClick" href="#"><img src="https://fontmeme.com/permalink/220520/5eb8c995a6653abb8ffe3ce39ff01a53.png" alt="logo" srcset="" /></a>
     <slot></slot>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'HeaderComp'
+  name: 'HeaderComp',
+  methods: {
+    homeClick () {
+      this.$emit("homeClick")
+    }
+  }
 }
 </script>
 
