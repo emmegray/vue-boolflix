@@ -1,8 +1,19 @@
 <template>
   <div id="app">
-    <HeaderComp>
-      <SearchBarComp></SearchBarComp>
-    </HeaderComp>
+    <header-comp>
+      <search-bar-comp @searchMovie="saveQuery"></search-bar-comp>
+    </header-comp>
+    <div>
+      <MoviePoster 
+        v-for="movie in movies"
+        :key="movie.id"
+        :poster="movie.poster_path"
+        :title="movie.title"
+        :originalTitle="movie.original_title"
+        :originalLanguage="movie.original_language"
+        :voteAverage="movie.vote_average"
+      />
+    </div>
   </div>
 </template>
 
@@ -10,22 +21,29 @@
 import axios from "axios";
 import HeaderComp from './components/HeaderComp.vue'
 import SearchBarComp from './components/SearchBarComp.vue'
+import MoviePoster from "./components/MoviePoster.vue";
 
 export default {
   name: 'App',
   components: {
     HeaderComp,
-    SearchBarComp
-  },
+    SearchBarComp,
+    MoviePoster
+},
   data (){
     return {
       apiUrl: 'https://api.themoviedb.org/3/search/movie',
       api_key:'912eb08b9205eeff45dbaffd282e9c4e',
       language: 'it_IT',
-      query: ''
+      query: '',
+      movies: [],
     }
   },
-  mounted: {
+  methods:{
+    saveQuery (value) {
+      this.query = value
+    },
+
     getApi () {
       axios.get(this.apiUrl, {
         params: {
@@ -35,11 +53,16 @@ export default {
         }
       })
       .then(res => {
-        console.log(res.data);
+        this.movies = res.data.results
       })
       .catch(err => {
         console.log(err);
       })
+    }
+  },
+  watch: {
+    query () {
+      this.getApi();
     }
   }
 }
