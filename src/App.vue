@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header-comp @homeClick="getPopularMovies">
+    <header-comp @homeClick="getPopularMovies" @changePage="getPopularTvSeries" >
       <search-bar-comp @searchMovie="saveQuery" @searchMovieGenre="saveGenre"></search-bar-comp>
     </header-comp>
     <div class="container">
@@ -23,7 +23,8 @@
 import HeaderComp from './components/HeaderComp.vue'
 import SearchBarComp from './components/SearchBarComp.vue'
 import MoviePoster from "./components/MoviePoster.vue";
-import { getMoviePopular, getSearchMovie } from './api';
+import { getMoviePopular, getSearchMovie, getSearchTvSeries, getTvSeriesPopular} from './api';
+
 
 export default {
   name: 'App',
@@ -56,6 +57,30 @@ export default {
         .catch((err) => {
           if (err.response.status === 404) {
             this.movies = [];
+          }
+        })
+    },
+
+    getTvSeriesQuery() {
+      getSearchTvSeries(this.query, this.genre)
+        .then((res) => {
+          this.tvSeries = res.data.results;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.tvSeries = [];
+          }
+        })
+    },
+
+    getPopularTvSeries() {
+      getTvSeriesPopular(this.genre)
+        .then((res) => {
+          this.tvSeries = res.data.results;
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            this.tvSeries = [];
           }
         })
     },

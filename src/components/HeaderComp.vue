@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <a @click="homeClick" href="#"><img src="https://fontmeme.com/temporary/6a70d7c8925a7bbf00f474f7029b84e5.png" alt="logo" srcset="" /></a>
-    <a href="#">Movies</a>
-    <a @click="changePage" href="#">Serie TV</a>
+    <a @click="homeClick" href="#"><img src="https://fontmeme.com/permalink/220523/5c557ca17e32ce141d438fc79261cc9a.png" alt="logo" srcset="" /></a>
+    <a @click="homeClick" href="#">Movies</a>
+    <a @click="tvSeriesPage" href="#">Serie TV</a>
     <slot></slot>
   </nav>
 </template>
@@ -14,8 +14,8 @@ export default {
     homeClick () {
       this.$emit("homeClick")
     },
-    changePage (){
-      this.$emit("changePage", "tv")
+    tvSeriesPage (){
+      this.$emit("tvSeriesPage")
     }
   }
 }

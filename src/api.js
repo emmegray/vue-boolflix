@@ -18,7 +18,7 @@ export function getSearchMovie(query, genre) {
   return getAPI(`${api_url}/search/movie`, { query, with_genres: genre });
 }
 
-export function getSearchTv(query, genre) {
+export function getSearchTvSeries(query, genre) {
   return getAPI(`${api_url}/search/tv`, { query, with_genres: genre });
 }
 
@@ -26,6 +26,14 @@ export function getMoviePopular(genre) {
   return getAPI(`${api_url}/movie/popular`, { with_genres: genre });
 }
 
+export function getTvSeriesPopular(genre) {
+  return getAPI(`${api_url}/tv/popular`, { with_genres: genre });
+}
+
 export function getGenreMovieList() {
   return getAPI(`${api_url}/genre/movie/list`);
+}
+
+export function getGenreTvSeriesList() {
+  return getAPI(`${api_url}/genre/tv/list`);
 }
