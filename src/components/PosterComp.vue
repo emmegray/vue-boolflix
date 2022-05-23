@@ -5,7 +5,7 @@
       <h1>{{title}}</h1>
       <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
       <span class="overview">{{overview}}</span>
-      <span>Lingua: <lang-flag :iso="`${originalLanguage}`" :squared="false" /></span>
+      <lang-flag :iso="`${originalLanguage}`" :squared="false" />
       <h3><font-awesome-icon v-for="star in stars" :key="star" icon="fa-solid fa-star" /><font-awesome-icon v-for="star in (5 - stars)" :key="star" icon="fa-regular fa-star" /></h3>
     </div>
   </div>
@@ -53,7 +53,7 @@ h2 {
 }
 
 h3 {
-  color: gold;
+  color: rgb(251,237,63);
 }
 
 .card-body {
@@ -78,7 +78,8 @@ h3 {
   text-align: left;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  overflow-y: scroll; 
+  overflow-y: scroll;
+  margin-bottom: 10px;
 }
 
 .overview::-webkit-scrollbar {
