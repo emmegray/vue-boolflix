@@ -2,10 +2,11 @@
   <div class="movie card">
     <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
     <div class="card-body">
-      <h1>{{ title }}</h1>
-      <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>
-      <span>Lingua: {{originalLanguage}}</span>
-      <h3>Voto: {{ voteAverage }}</h3>
+      <h1>{{title}}</h1>
+      <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
+      <span class="overview">{{overview}}</span>
+      <span>Lingua:</span> <lang-flag :iso="`${originalLanguage}`" :squared="false" />
+      <h3>Voto: {{voteAverage}}</h3>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ export default {
     title: String,
     originalTitle: String,
     originalLanguage: String,
+    overview: String,
     voteAverage: Number,
   }
 };
@@ -71,5 +73,10 @@ h3 {
 
 .card:hover .card-body {
   opacity: 1;
+}
+
+.overview {
+  overflow-y: scroll;
+  text-align: left;
 }
 </style>

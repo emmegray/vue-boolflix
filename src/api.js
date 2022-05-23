@@ -18,6 +18,10 @@ export function getSearchMovie(query, genre) {
   return getAPI(`${api_url}/search/movie`, { query, with_genres: genre });
 }
 
+export function getSearchTvshow(query, genre) {
+  return getAPI(`${api_url}/search/tv`, { query, with_genres: genre });
+}
+
 export function getMoviePopular(genre) {
   return getAPI(`${api_url}/movie/popular`, { with_genres: genre });
 }
