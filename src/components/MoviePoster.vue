@@ -2,12 +2,11 @@
   <div class="movie card">
     <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
     <div class="card-body">
-      <span :class="`fi-${originalLanguage} fis`"></span>
-
-      <h1>{{ title }}</h1>
-      <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>
-
-      <h3>{{ voteAverage }}</h3>
+      <h1>{{title}}</h1>
+      <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
+      <span class="overview">{{overview}}</span>
+      <span>Lingua: <lang-flag :iso="`${originalLanguage}`" :squared="false" /></span>
+      <h3>Voto: {{voteAverage}}</h3>
     </div>
   </div>
 </template>
@@ -20,6 +19,7 @@ export default {
     title: String,
     originalTitle: String,
     originalLanguage: String,
+    overview: String,
     voteAverage: Number,
   }
 };
@@ -29,6 +29,7 @@ export default {
 .card {
   overflow: hidden;
   position: relative;
+  text-align: center;
 }
 
 img {
@@ -50,12 +51,6 @@ h3 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.fis {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-}
-
 .card-body {
   color: white;
   position: absolute;
@@ -72,5 +67,16 @@ h3 {
 
 .card:hover .card-body {
   opacity: 1;
+}
+
+.overview {
+  text-align: left;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll; 
+}
+
+.overview::-webkit-scrollbar {
+  display: none;
 }
 </style>

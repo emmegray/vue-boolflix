@@ -1,6 +1,8 @@
 <template>
   <nav>
-    <a @click="homeClick" href="#"><img src="https://fontmeme.com/permalink/220520/5eb8c995a6653abb8ffe3ce39ff01a53.png" alt="logo" srcset="" /></a>
+    <a @click="homeClick" href="#"><img src="https://fontmeme.com/permalink/220523/5c557ca17e32ce141d438fc79261cc9a.png" alt="logo" srcset="" /></a>
+    <a @click="homeClick" href="#">Movies</a>
+    <a @click="tvSeriesPage" href="#">Serie TV</a>
     <slot></slot>
   </nav>
 </template>
@@ -11,6 +13,9 @@ export default {
   methods: {
     homeClick () {
       this.$emit("homeClick")
+    },
+    tvSeriesPage (){
+      this.$emit("tvSeriesPage")
     }
   }
 }
@@ -23,7 +28,8 @@ nav {
   left: 0;
   width: 100%;
   padding: 10px;
-  background-color: black;
+  background: rgb(116,16,16);
+  background: linear-gradient(0deg, rgba(116,16,16,0) 0%, rgba(255,165,233,0) 27%, rgba(0,0,0,1) 69%);
   color: red;
   text-align: start;
   display: flex;
@@ -31,5 +37,13 @@ nav {
   align-items: center;
   justify-content: space-between;
   z-index: 1000;
+  a {
+    text-decoration: none;
+    color: white;
+    justify-self: left;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 } 
 </style>
