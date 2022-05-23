@@ -2,12 +2,10 @@
   <div class="movie card">
     <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
     <div class="card-body">
-      <span>{{originalLanguage}}</span>
-
       <h1>{{ title }}</h1>
       <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>
-
-      <h3>{{ voteAverage }}</h3>
+      <span>Lingua: {{originalLanguage}}</span>
+      <h3>Voto: {{ voteAverage }}</h3>
     </div>
   </div>
 </template>
@@ -29,6 +27,7 @@ export default {
 .card {
   overflow: hidden;
   position: relative;
+  text-align: center;
 }
 
 img {
