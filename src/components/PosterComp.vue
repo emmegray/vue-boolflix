@@ -35,6 +35,10 @@ export default {
   overflow: hidden;
   position: relative;
   text-align: center;
+  &:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 0.85rem rgb(0, 0, 0));
+  }
 }
 
 img {
@@ -75,11 +79,11 @@ h3 {
 }
 
 .overview {
-  text-align: left;
   -ms-overflow-style: none;
   scrollbar-width: none;
   overflow-y: scroll;
   margin-bottom: 10px;
+  font-size: small;
 }
 
 .overview::-webkit-scrollbar {
