@@ -6,7 +6,7 @@
       <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
       <span class="overview">{{overview}}</span>
       <span>Lingua: <lang-flag :iso="`${originalLanguage}`" :squared="false" /></span>
-      <h3>Voto: {{voteAverage}}</h3>
+      <h3><font-awesome-icon v-for="star in stars" :key="star" icon="fa-solid fa-star" /><font-awesome-icon v-for="star in (5 - stars)" :key="star" icon="fa-regular fa-star" /></h3>
     </div>
   </div>
 </template>
@@ -21,6 +21,11 @@ export default {
     originalLanguage: String,
     overview: String,
     voteAverage: Number,
+  },
+  computed: {
+    stars() {
+      return Math.ceil(this.voteAverage / 2);
+    }
   }
 };
 </script>
@@ -48,7 +53,7 @@ h2 {
 }
 
 h3 {
-  font-family: Arial, Helvetica, sans-serif;
+  color: gold;
 }
 
 .card-body {

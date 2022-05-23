@@ -10,12 +10,13 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 /* Fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 /* Icons */
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarEmpty } from '@fortawesome/free-regular-svg-icons'
 /* Icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* add icons to the library */
-library.add(faMagnifyingGlass)
+library.add(faMagnifyingGlass, faStar, faStarEmpty)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
