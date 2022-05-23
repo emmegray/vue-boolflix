@@ -4,7 +4,7 @@
       <option :value="null">Scegli un genere...</option>
       <option v-for="genre in genres" :key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
-    <input @keyup.enter="searchMovie" type="text" placeholder="Cerca un film qui" name="search" v-model="search">
+    <input @keyup.enter="searchMovie" type="text" placeholder="Cosa vuoi guardare oggi?" name="search" v-model="search">
     <button class="btn-danger" @click="searchMovie"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
   </div>
 </template>
@@ -59,7 +59,7 @@ input, select {
   border-radius: 10px;
 }
 button {
-  padding: 8px 10px;
+  padding: 10px 15px;
   border-radius: 10px;
 }
 </style>

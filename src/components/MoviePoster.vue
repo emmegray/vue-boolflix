@@ -5,7 +5,7 @@
       <h1>{{title}}</h1>
       <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
       <span class="overview">{{overview}}</span>
-      <span>Lingua:</span> <lang-flag :iso="`${originalLanguage}`" :squared="false" />
+      <span>Lingua: <lang-flag :iso="`${originalLanguage}`" :squared="false" /></span>
       <h3>Voto: {{voteAverage}}</h3>
     </div>
   </div>
@@ -51,12 +51,6 @@ h3 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.fis {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-}
-
 .card-body {
   color: white;
   position: absolute;
@@ -76,7 +70,13 @@ h3 {
 }
 
 .overview {
-  overflow-y: scroll;
   text-align: left;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll; 
+}
+
+.overview::-webkit-scrollbar {
+  display: none;
 }
 </style>
