@@ -1,5 +1,5 @@
 <template>
-  <div class="movie card">
+  <div class="poster card">
     <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
     <div class="card-body">
       <h1>{{title}}</h1>
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  nome: 'MoviePoster',
+  nome: 'PosterComp',
   props: {
     poster: String,
     title: String,

@@ -1,7 +1,7 @@
 <template>
   <nav>
     <a @click="homeClick" href="#"><img src="https://fontmeme.com/permalink/220523/5c557ca17e32ce141d438fc79261cc9a.png" alt="logo" srcset="" /></a>
-    <a @click="homeClick" href="#">Movies</a>
+    <a @click="moviePage" href="#">Movies</a>
     <a @click="tvSeriesPage" href="#">Serie TV</a>
     <slot></slot>
   </nav>
@@ -14,8 +14,11 @@ export default {
     homeClick () {
       this.$emit("homeClick")
     },
+    moviePage (){
+      this.$emit("changePage", "movie")
+    },
     tvSeriesPage (){
-      this.$emit("tvSeriesPage")
+      this.$emit("changePage", "tv")
     }
   }
 }

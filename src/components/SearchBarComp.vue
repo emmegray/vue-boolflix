@@ -1,33 +1,36 @@
 <template>
   <div class="search">
-    <select @change="searchMovieGenre" name="genre" id="genre" v-model="genre">
+    <select @change="changeGenre" name="genre" id="genre" v-model="genre">
       <option :value="null">Scegli un genere...</option>
       <option v-for="genre in genres" :key="genre.id" :value="genre.id">{{genre.name}}</option>
     </select>
-    <input @keyup.enter="searchMovie" type="text" placeholder="Cosa vuoi guardare oggi?" name="search" v-model="search">
-    <button class="btn-danger" @click="searchMovie"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
+    <input @keyup.enter="search" type="text" placeholder="Cosa vuoi guardare oggi?" name="search" v-model="query">
+    <button class="btn-danger" @click="search"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></button>
   </div>
 </template>
 
 <script>
-import { getGenreMovieList } from '@/api'
+import { getGenreMovieList, getGenreTvSeriesList } from '@/api'
 
 export default {
   name: 'SearchBarComp',
+  props: {
+    page: String,
+  },
   data (){
     return {
-      search: '',
+      query: '',
       genre: null,
       genres: []
     }
   },
   methods: {
-    searchMovie () {
-      this.$emit("searchMovie", this.search)
+    search () {
+      this.$emit("search", this.query)
     },
 
-    searchMovieGenre () {
-      this.$emit("searchMovieGenre", this.genre);
+    changeGenre () {
+      this.$emit("changeGenre", this.genre);
     },
 
     saveGenres(axiosResponse) {
@@ -41,10 +44,19 @@ export default {
     },
 
     getGenres () {
-      getGenreMovieList()
+      if (this.page === "tv") getGenreTvSeriesList()
+        .then(this.saveGenres)
+        .catch(this.noGenres)
+      if (this.page === "movie") getGenreMovieList()
         .then(this.saveGenres)
         .catch(this.noGenres)
     },
+  },
+  watch: {
+    page () {
+      this.genre = null;
+      this.getGenres()
+    }
   },
   mounted() {
     this.getGenres();
