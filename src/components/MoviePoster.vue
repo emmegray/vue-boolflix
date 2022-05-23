@@ -2,7 +2,7 @@
   <div class="movie card">
     <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
     <div class="card-body">
-      <span :class="`fi-${originalLanguage} fis`"></span>
+      <span>{{originalLanguage}}</span>
 
       <h1>{{ title }}</h1>
       <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>

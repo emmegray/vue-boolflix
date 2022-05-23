@@ -15,7 +15,7 @@ export function getAPI(url = '', parameters = {}) {
 }
 
 export function getSearchMovie(query, genre) {
-  return getAPI(`${api_url}/discover/movie`, { query, with_genres: genre });
+  return getAPI(`${api_url}/search/movie`, { query, with_genres: genre });
 }
 
 export function getMoviePopular(genre) {

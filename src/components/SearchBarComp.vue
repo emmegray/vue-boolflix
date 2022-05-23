@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input {
+input, select {
   padding: 10px;
   margin-right: 10px;
   border-radius: 10px;
