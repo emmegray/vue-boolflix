@@ -35,6 +35,7 @@ export default {
   overflow: hidden;
   position: relative;
   text-align: center;
+  border: 0px none;
   &:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 0.85rem rgb(0, 0, 0));
