@@ -23,7 +23,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(BootstrapVue)
 
 import LangFlag from 'vue-lang-code-flags'
-Vue.component('lang-flag', LangFlag);
+Vue.component('lang-flag', LangFlag)
 
 Vue.config.productionTip = false
 

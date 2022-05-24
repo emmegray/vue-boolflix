@@ -26,40 +26,40 @@ export default {
   },
   methods: {
     search () {
-      this.$emit("search", this.query)
+      this.$emit('search', this.query)
     },
 
     changeGenre () {
-      this.$emit("changeGenre", this.genre);
+      this.$emit('changeGenre', this.genre)
     },
 
     saveGenres(axiosResponse) {
-      this.genres = axiosResponse.data.genres;
+      this.genres = axiosResponse.data.genres
     },
 
     noGenres(axiosError) {
       if (axiosError.response.status === 404) {
-        this.genres = [];
+        this.genres = []
       }
     },
 
     getGenres () {
-      if (this.page === "tv") getGenreTvSeriesList()
+      if (this.page === 'tv') getGenreTvSeriesList()
         .then(this.saveGenres)
         .catch(this.noGenres)
-      if (this.page === "movie") getGenreMovieList()
+      if (this.page === 'movie') getGenreMovieList()
         .then(this.saveGenres)
         .catch(this.noGenres)
     },
   },
   watch: {
     page () {
-      this.genre = null;
+      this.genre = null
       this.getGenres()
     }
   },
   mounted() {
-    this.getGenres();
+    this.getGenres()
   }
 }
 </script>

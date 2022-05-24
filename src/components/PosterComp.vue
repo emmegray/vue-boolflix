@@ -1,13 +1,18 @@
 <template>
   <div class="poster card">
-    <img :src="`https://image.tmdb.org/t/p/w500/${poster}`" :alt="title" srcset="" />
+    <img :src="poster ? `https://image.tmdb.org/t/p/w500/${poster}` : `/placeholder.png`" :alt="title" srcset="" />
     <div class="card-body">
-      <h1>{{title}}</h1>
-      <h2 v-if="title !== originalTitle">{{originalTitle}}</h2>
-      <span class="overview">{{overview}}</span>
+      <h1>{{ title }}</h1>
+      <h2 v-if="title !== originalTitle">{{ originalTitle }}</h2>
+      <span class="overview">{{ overview }}</span>
       <lang-flag :iso="`${originalLanguage}`" :squared="false" />
-      <h3><font-awesome-icon v-for="star in stars" :key="star" icon="fa-solid fa-star" /><font-awesome-icon v-for="star in (5 - stars)" :key="star" icon="fa-regular fa-star" /></h3>
+      <h3>
+        <font-awesome-icon v-for="star in stars" :key="star" icon="fa-solid fa-star" />
+        <font-awesome-icon v-for="star in (5 - stars)" :key="star" icon="fa-regular fa-star" />
+      </h3>
+      <button @click="viewMovie">Dettaglio</button>
     </div>
+    <span class="placeholder" v-if="!poster">{{ title }}</span>
   </div>
 </template>
 
@@ -21,13 +26,20 @@ export default {
     originalLanguage: String,
     overview: String,
     voteAverage: Number,
+    id: String,
   },
   computed: {
     stars() {
-      return Math.ceil(this.voteAverage / 2);
+      return Math.ceil(this.voteAverage / 2)
+    }
+  },
+  methods: {
+    viewMovie() {
+      this.$emit('viewMovie', this.id)
     }
   }
-};
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -36,9 +48,10 @@ export default {
   position: relative;
   text-align: center;
   border: 0px none;
+
   &:hover {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 0.85rem rgb(0, 0, 0));
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 0.85rem rgb(0, 0, 0));
   }
 }
 
@@ -58,7 +71,7 @@ h2 {
 }
 
 h3 {
-  color: rgb(251,237,63);
+  color: rgb(251, 237, 63);
 }
 
 .card-body {

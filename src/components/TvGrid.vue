@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import { getSearchTvSeries, getTvSeriesPopular } from "@/api";
-import PosterComp from "@/components/PosterComp.vue";
+import { getSearchTvSeries, getTvSeriesPopular } from '@/api'
+import PosterComp from '@/components/PosterComp.vue'
 
 export default {
   name: 'App',
@@ -40,11 +40,11 @@ export default {
     getSeriesQuery() {
       getSearchTvSeries(this.query, this.genre)
         .then((res) => {
-          this.series = res.data.results;
+          this.series = res.data.results
         })
         .catch((err) => {
           if (err.response.status === 404) {
-            this.series = [];
+            this.series = []
           }
         })
     },
@@ -52,20 +52,20 @@ export default {
     getSeriesPopular() {
       getTvSeriesPopular(this.genre)
         .then((res) => {
-          this.series = res.data.results;
+          this.series = res.data.results
         })
         .catch((err) => {
           if (err.response.status === 404) {
-            this.series = [];
+            this.series = []
           }
         })
     },
 
     load() {
       if (this.query) {
-        this.getSeriesQuery();
+        this.getSeriesQuery()
       } else {
-        this.getSeriesPopular();
+        this.getSeriesPopular()
       }
     }
   },

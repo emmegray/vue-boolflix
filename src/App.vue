@@ -11,8 +11,8 @@
 <script>
 import HeaderComp from './components/HeaderComp.vue'
 import SearchBarComp from './components/SearchBarComp.vue'
-import MovieGrid from './components/MovieGrid.vue';
-import TvGrid from './components/TvGrid.vue';
+import MovieGrid from './components/MovieGrid.vue'
+import TvGrid from './components/TvGrid.vue'
 
 export default {
   name: 'App',
@@ -21,12 +21,12 @@ export default {
     SearchBarComp,
     MovieGrid,
     TvGrid
-},
+  },
   data() {
     return {
       query: '',
       genre: null,
-      page: "movie"
+      page: 'movie'
     }
   },
 

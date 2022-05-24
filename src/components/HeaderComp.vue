@@ -12,13 +12,13 @@ export default {
   name: 'HeaderComp',
   methods: {
     homeClick () {
-      this.$emit("homeClick")
+      this.$emit('homeClick')
     },
     moviePage (){
-      this.$emit("changePage", "movie")
+      this.$emit('changePage', 'movie')
     },
     tvSeriesPage (){
-      this.$emit("changePage", "tv")
+      this.$emit('changePage', 'tv')
     }
   }
 }

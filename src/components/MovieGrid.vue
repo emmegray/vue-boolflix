@@ -1,11 +1,14 @@
 <template>
   <div class="container">
+    <div class="row" v-if="id">
+      <movie-page :id="id" />
+    </div>
+
     <div class="row">
       <div v-for="movie in movies" :key="movie.id" class="col-3">
         <poster-comp :poster="movie.poster_path" :title="movie.title" :originalTitle="movie.original_title"
-        :originalLanguage="movie.original_language"
-        :overview="movie.overview"
-        :voteAverage="movie.vote_average" />
+          :originalLanguage="movie.original_language" :overview="movie.overview" :voteAverage="movie.vote_average"
+          :id="movie.id" @viewMovie="viewMovie" />
       </div>
       <div class="col-12 not-found" v-if="query && movies.length == 0">
         <h1>Nessun film trovato</h1>
@@ -15,13 +18,15 @@
 </template>
 
 <script>
-import PosterComp from "@/components/PosterComp.vue";
-import { getMoviePopular, getSearchMovie } from '@/api';
+import PosterComp from '@/components/PosterComp.vue'
+import { getMoviePopular, getSearchMovie } from '@/api'
+import MoviePage from './MoviePage.vue'
 
 export default {
   name: 'App',
   components: {
-    PosterComp
+    PosterComp,
+    MoviePage
   },
 
   props: {
@@ -31,7 +36,8 @@ export default {
 
   data() {
     return {
-      movies: []
+      movies: [],
+      id: '',
     }
   },
 
@@ -39,11 +45,11 @@ export default {
     getMoviesQuery() {
       getSearchMovie(this.query, this.genre)
         .then((res) => {
-          this.movies = res.data.results;
+          this.movies = res.data.results
         })
         .catch((err) => {
           if (err.response.status === 404) {
-            this.movies = [];
+            this.movies = []
           }
         })
     },
@@ -51,20 +57,25 @@ export default {
     getPopularMovies() {
       getMoviePopular(this.genre)
         .then((res) => {
-          this.movies = res.data.results;
+          this.movies = res.data.results
         })
         .catch((err) => {
           if (err.response.status === 404) {
-            this.movies = [];
+            this.movies = []
           }
         })
     },
 
+    viewMovie(id) {
+      this.id = id
+    },
+
     load() {
+      this.id = ''
       if (this.query) {
-        this.getMoviesQuery();
+        this.getMoviesQuery()
       } else {
-        this.getPopularMovies();
+        this.getPopularMovies()
       }
     }
   },
