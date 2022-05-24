@@ -8,9 +8,9 @@
       <lang-flag :iso="`${originalLanguage}`" :squared="false" />
       <h3>
         <font-awesome-icon v-for="star in stars" :key="star" icon="fa-solid fa-star" />
-        <font-awesome-icon v-for="star in (5 - stars)" :key="star" icon="fa-regular fa-star" />
+        <font-awesome-icon v-for="star in (5 - stars)" :key="star + 5" icon="fa-regular fa-star" />
       </h3>
-      <button @click="viewMovie">Dettaglio</button>
+      <button @click="view" class="btn-danger">Dettagli</button>
     </div>
     <span class="placeholder" v-if="!poster">{{ title }}</span>
   </div>
@@ -26,7 +26,7 @@ export default {
     originalLanguage: String,
     overview: String,
     voteAverage: Number,
-    id: String,
+    id: Number,
   },
   computed: {
     stars() {
@@ -34,8 +34,9 @@ export default {
     }
   },
   methods: {
-    viewMovie() {
-      this.$emit('viewMovie', this.id)
+    view() {
+      scroll(0, 0)
+      this.$emit('view', this.id)
     }
   }
 
@@ -72,6 +73,10 @@ h2 {
 
 h3 {
   color: rgb(251, 237, 63);
+}
+
+.btn-danger {
+  border-radius: 5px;
 }
 
 .card-body {

@@ -42,6 +42,14 @@ export function getMovie(movie_id){
   return getAPI(`${api_url}/movie/${movie_id}`)
 }
 
+export function getSerie(tv_id){
+  return getAPI(`${api_url}/tv/${tv_id}`)
+}
+
 export function getMovieCredits(movie_id){
   return getAPI(`${api_url}/movie/${movie_id}/credits`)
+}
+
+export function getSeriesCredits(tv_id){
+  return getAPI(`${api_url}/tv/${tv_id}/credits`)
 }

@@ -5,7 +5,9 @@
           <poster-comp :poster="serie.poster_path" :title="serie.name" :originalTitle="serie.original_name"
           :originalLanguage="serie.original_language"
           :overview="serie.overview"
-          :voteAverage="serie.vote_average" />
+          :voteAverage="serie.vote_average"
+          :id="serie.id"
+          @view="view" />
         </div>
         <div class="col-12 not-found" v-if="query && series.length == 0">
           <h1>Nessuna serie trovata</h1>
@@ -19,7 +21,7 @@ import { getSearchTvSeries, getTvSeriesPopular } from '@/api'
 import PosterComp from '@/components/PosterComp.vue'
 
 export default {
-  name: 'App',
+  name: 'TvGrid',
   components: {
     PosterComp
   },
@@ -59,6 +61,10 @@ export default {
             this.series = []
           }
         })
+    },
+
+    view(id){
+      this.$emit('view', id)
     },
 
     load() {

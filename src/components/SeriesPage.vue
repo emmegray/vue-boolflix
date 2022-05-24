@@ -1,51 +1,42 @@
 <template>
-  <div id="movie-page">
-    <page-card :details="movie" :cast="credits.cast" />
+  <div id="series-page">
+    <page-card :details="serie" :cast="credits.cast" />
   </div>
 </template>
 
 <script>
-import { getMovie, getMovieCredits } from '@/api'
+import { getSerie, getSeriesCredits } from '@/api'
 import PageCard from './PageCard.vue'
 export default {
-  name: 'MoviePage',
+  name: 'SeriesPage',
   components: { PageCard },
   props: {
     id: Number,
   },
   data() {
     return {
-      movie: {},
+      serie: {},
       credits: {}
     }
   },
   mounted() {
-    getMovie(this.id)
+    getSerie(this.id)
       .then(res => {
-        this.movie = res.data
+        this.serie = res.data
       })
-    getMovieCredits(this.id)
+    getSeriesCredits(this.id)
       .then(res => {
         this.credits = res.data
       })
   },
-  computed: {
-    stars() {
-      if (this.movie.vote_average) {
-        return Math.ceil(this.movie.vote_average / 2)
-      } else {
-        return 0
-      }
-    }
-  },
   watch: {
     id() {
-      getMovie(this.id)
+      getSerie(this.id)
         .then(res => {
-          this.movie = res.data
+          this.serie = res.data
         })
         .catch(console.error)
-      getMovieCredits(this.id)
+      getSeriesCredits(this.id)
         .then(res => {
           this.credits = res.data
         })

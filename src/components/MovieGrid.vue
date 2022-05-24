@@ -1,14 +1,10 @@
 <template>
   <div class="container">
-    <div class="row" v-if="id">
-      <movie-page :id="id" />
-    </div>
-
     <div class="row">
       <div v-for="movie in movies" :key="movie.id" class="col-3">
         <poster-comp :poster="movie.poster_path" :title="movie.title" :originalTitle="movie.original_title"
           :originalLanguage="movie.original_language" :overview="movie.overview" :voteAverage="movie.vote_average"
-          :id="movie.id" @viewMovie="viewMovie" />
+          :id="movie.id" @view="view" />
       </div>
       <div class="col-12 not-found" v-if="query && movies.length == 0">
         <h1>Nessun film trovato</h1>
@@ -20,13 +16,11 @@
 <script>
 import PosterComp from '@/components/PosterComp.vue'
 import { getMoviePopular, getSearchMovie } from '@/api'
-import MoviePage from './MoviePage.vue'
 
 export default {
-  name: 'App',
+  name: 'MovieGrid',
   components: {
-    PosterComp,
-    MoviePage
+    PosterComp
   },
 
   props: {
@@ -37,7 +31,6 @@ export default {
   data() {
     return {
       movies: [],
-      id: '',
     }
   },
 
@@ -66,8 +59,8 @@ export default {
         })
     },
 
-    viewMovie(id) {
-      this.id = id
+    view(id) {
+      this.$emit('view', id)
     },
 
     load() {
