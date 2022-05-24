@@ -36,7 +36,7 @@ export default {
   position: relative;
   text-align: center;
   &:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   filter: drop-shadow(0 0 0.85rem rgb(0, 0, 0));
   }
 }
